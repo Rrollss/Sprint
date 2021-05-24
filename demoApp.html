@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo App</title>
+    <style>
+      .cont {
+        max-width: 1024px;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+      }
+      .cont .form {
+        width: 25%;
+        border: 1px solid black;
+        height: 80vh;
+      }
+      .cont .form > input,
+      .cont .form > button {
+        margin: 5%;
+        font-weight: bold;
+        padding: 2px;
+      }
+      .cont .form > button {
+        color: chartreuse;
+      }
+      .cont .menu {
+        display: flex;
+        width: 75%;
+        border: 1px solid black;
+        height: 80vh;
+      }
+      .menu > div {
+        width: 30%;
+        height: 50%;
+        border: 1px solid black;
+        margin: 1%;
+      }
+      .menu > div button {
+        position: relative;
+        top: 80%;
+        margin: 10%;
+        border: 1px solid black;
+        font-weight: bold;
+      }
+      .item {
+        margin: 1%;
+        padding: 1%;
+      }
+      #imgh {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cont">
+      <div class="form">
+        <input class="input" id="name" type="text" placeholder="Name" />
+        <input class="input" type="text" placeholder="Price" />
+        <input class="input" type="text" placeholder="Category" />
+        <input
+          class="input"
+          type="number"
+          placeholder="Estimated delivery date"
+        />
+        <input class="input" type="url" placeholder="image optional" />
+        <button class="btnAdd">Add Product</button>
+      </div>
+      <div class="menu">
+        <!-- <div class="item"></div> -->
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var btnAdd = document.getElementsByClassName("btnAdd")[0];
+    btnAdd.addEventListener("click", add);
+    var i = 0;
+    function add() {
+      i++;
+      var name = document.getElementsByClassName("input")[0].value;
+      var price = document.getElementsByClassName("input")[1].value;
+      var catogory = document.getElementsByClassName("input")[2].value;
+      var delivery = document.getElementsByClassName("input")[3].value;
+      var image = document.getElementsByClassName("input")[4].value;
+
+      var div = document.getElementsByClassName("menu")[0];
+
+      var item = document.createElement("div");
+
+      item.innerHTML = `
+       <div class="item" id="removediv">
+        <p>Name:${name}</p>
+        <p id ="newprice">Price:${price}</p>
+        <p>Catogory:${catogory}</p>
+        <p >Delievery Date:${delivery}</p>
+        <p> Image:  <img src="${image}" alt="Image" id="imgh"> </p>
+          <button id= "remove">Remove</button>
+          <button id="update">Update</button>
+        </div>
+      `;
+
+      div.appendChild(item);
+
+      var update1 = document.getElementById("update");
+      update1.addEventListener("click", updateNew);
+
+      function updateNew() {
+        var new_price = window.prompt(`enter New price`);
+        var newprice = document.getElementById("newprice");
+        newprice.innerHTML = ` Price :${new_price}`;
+      }
+      var remove = document.getElementById("remove");
+      remove.addEventListener("click", remove1);
+
+      function remove1() {
+        var r = document.getElementById("removediv");
+        var parent = r.parentElement;
+        parent.remove();
+      }
+    }
+  </script>
+</html>
